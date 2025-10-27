@@ -2,6 +2,8 @@ apiVersion: v1
 kind: Service
 metadata:
   name: {{ include "nginx.fullname" . }}
+  annotations:
+    argocd.argoproj.io/sync-options: Prune=false
   labels:
     {{- include "nginx.labels" . | nindent 4 }}
 spec:
