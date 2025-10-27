@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: prune-application
-  namespace: argocd
+  namespace: prune-sync
 spec:
   destination:
     namespace: prune-sync
