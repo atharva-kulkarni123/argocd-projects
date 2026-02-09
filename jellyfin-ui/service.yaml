@@ -9,5 +9,5 @@ spec:
   ports:
     - port: 8096
       targetPort: 8096
-      nodePort: 30096
+      # nodePort removed to avoid 'already allocated' conflicts; let Kubernetes assign
 
