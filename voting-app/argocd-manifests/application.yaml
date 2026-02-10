@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: voting-app     # name of the application in ArgoCD
+  namespace: argocd    # must be the namespace where ArgoCD is installed
+spec:
+  project: voting-app    # name of the project in ArgoCD, create a new custom project if needed --> refer appProject.yaml
+  destination:
+    namespace: voting-ns   # namespace where manifests will be deployed
+    server: https://kubernetes.default.svc
+  source:
+    repoURL: "https://github.com/atharva-kulkarni123/argocd-projects.git"
+    targetRevision: main
+    path: voting-app/chart
+    helm:
+      releaseName: voting-app
+      valueFiles:
+        - values.yaml
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

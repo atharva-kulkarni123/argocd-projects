@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: voting-app
+  namespace: argocd
+spec:
+  description: Project for Voting-app
+
+  # ✅ Allow only these Git repos as sources
+  sourceRepos:
+    - 'https://github.com/atharva-kulkarni123/argocd-projects.git'
+
+  # ✅ Allow deployments only to these clusters/namespaces
+  destinations:
+    - namespace: voting-ns
+      server: https://kubernetes.default.svc
+
+  # ✅ (Optional) Allow specific resource types
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+
+  namespaceResourceWhitelist:
+    - group: '*'
+      kind: '*'
