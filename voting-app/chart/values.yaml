@@ -1,0 +1,55 @@
+replicaCount:
+  vote: 1
+  result: 1
+  worker: 1
+
+image:
+  vote:
+    repository: dockersamples/examplevotingapp_vote
+    tag: latest
+    pullPolicy: IfNotPresent
+  result:
+    repository: dockersamples/examplevotingapp_result
+    tag: latest
+    pullPolicy: IfNotPresent
+  worker:
+    repository: dockersamples/examplevotingapp_worker
+    tag: latest
+    pullPolicy: IfNotPresent
+  postgres:
+    repository: postgres
+    tag: "15-alpine"
+    pullPolicy: IfNotPresent
+  redis:
+    repository: redis
+    tag: alpine
+    pullPolicy: IfNotPresent
+
+service:
+  vote:
+    type: NodePort
+    port: 80
+    targetPort: 80
+    nodePort: 31000
+  result:
+    type: NodePort
+    port: 80
+    targetPort: 80
+    nodePort: 31001
+
+postgres:
+  user: postgres
+  password: postgres
+  database: votes
+
+redis:
+  host: redis
+  port: 6379
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 250m
+    memory: 256Mi
